@@ -96,7 +96,8 @@ function covtime($yt){
     if ($best) {
         send_json([
             'result' => [
-             'url'=> $best->url,
+    'vid'=> $best->url,
+    'ad'=> $best->url,
     'title' => $title,
     'img' => $img,
     'view_count' => $view_count,
