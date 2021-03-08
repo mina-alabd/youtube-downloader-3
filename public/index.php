@@ -93,15 +93,17 @@ function covtime($yt){
     }
 
 }
-
-header('Content-Type: application/json; charset=utf-8');
-
     if ($best) {
         send_json([
             'links' => [
              'url'=> $best->url,
-             'sizebet'=> $best->contentLength,
     'title' => $title,
+    'img' => $img,
+    'view_count' => $view_count,
+    'duration' => covtime($VidDuration),
+    'like_count' => $like_count,
+    'dislike_count' => $dislike_count,
+    'sizebet' => $best->contentLength,
     'size' => $bitrate,
     'Name API' => "AymanEGY",
               ],
