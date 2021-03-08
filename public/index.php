@@ -3,7 +3,17 @@
 require('../vendor/autoload.php');
 
 $url = isset($_GET['url']) ? $_GET['url'] : null;
-
+if(preg_match('/(http(s|):|)\/\/(www\.|)yout(.*?)\/(embed\/|watch.*?v=|)([a-z_A-Z0-9\-]{11})/i', $url)){
+function getYoutubeIdFromUrl($url) {
+    $parts = parse_url($url);
+    if(isset($parts['query'])){
+        parse_str($parts['query'], $qs);
+        if(isset($qs['v'])){
+            return $qs['v'];
+        }else if(isset($qs['vi'])){
+            return $qs['vi'];
+        }}}}
+      $id = getYoutubeIdFromUrl($url);
 
 
 /*
@@ -81,7 +91,7 @@ if ($bitrate >= 1073741824) {
     if ($best) {
         send_json([
             'links' => [
-             'url'=> $best,
+             'url'=> $best->url,
              'sizebet'=> $best->contentLength,
     'title' => $title,
     'size' => $bitrate,
