@@ -4,6 +4,50 @@ require('../vendor/autoload.php');
 
 $url = isset($_GET['url']) ? $_GET['url'] : null;
 
+
+
+
+if(preg_match('/(http(s|):|)\/\/(www\.|)yout(.*?)\/(embed\/|watch.*?v=|)([a-z_A-Z0-9\-]{11})/i', $url)){
+
+function getYoutubeIdFromUrl($url) {
+    $parts = parse_url($url);
+
+    if(isset($parts['query'])){
+
+        parse_str($parts['query'], $qs);
+
+        if(isset($qs['v'])){
+
+            return $qs['v'];
+
+        }else if(isset($qs['vi'])){
+
+            return $qs['vi'];
+
+        }}}}
+
+    }
+
+ $id = getYoutubeIdFromUrl($url);
+
+$getinfo = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=".$id."&key=AIzaSyAAr5xTBdLRiIUMvJPK4vUUEH6VlNwRiZY"))->items[0];
+
+$title = $getinfo->snippet->title;
+
+$view_count = $getinfo->statistics->viewCount;
+
+$duration = $getinfo->contentDetails->duration;
+
+$like_count = $getinfo->statistics->likeCount;
+
+$dislike_count = $getinfo->statistics->dislikeCount;
+
+
+
+
+
+
+
 function send_json($data)
 {
     header('Content-Type: application/json');
