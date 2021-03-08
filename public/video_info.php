@@ -26,7 +26,7 @@ try {
 
     if ($best) {
         send_json([
-            'links' => [$best->url]
+            'links' => [$best->url],
             'sizebet' => [$best->contentLength]
         ]);
     } else {
