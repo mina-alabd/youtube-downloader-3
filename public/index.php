@@ -22,7 +22,7 @@ $like_count = $getinfo->statistics->likeCount;
 $dislike_count = $getinfo->statistics->dislikeCount;
 function send_json($data)
 {
-    header('Content-Type: application/json');
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data, JSON_PRETTY_PRINT);
     exit;
 }
@@ -32,47 +32,25 @@ if (!$url) {
         'error' => 'No URL provided!'
     ]);
 }
-
 $youtube = new \YouTube\YouTubeDownloader();
-
 try {
     $links = $youtube->getDownloadLinks($url);
-
     $best = $links->getFirstCombinedFormat();
-
 $img = "https://i.ytimg.com/vi/".$id."/hqdefault.jpg";
-
-
-
 $bitrate = $best->contentLength;
-
 if ($bitrate >= 1073741824) {
-
             $bitrate = number_format($bitrate / 1073741824, 2) . ' GB';
-
         } elseif ($bitrate >= 1048576) {
-
             $bitrate = number_format($bitrate / 1048576, 2) . ' MB';
-
         } elseif ($bitrate >= 1024) {
-
             $bitrate = number_format($bitrate / 1024, 2) . ' KB';
-
         } elseif ($bitrate > 1) {
-
             $bitrate = $bitrate . ' bytes';
-
         } elseif ($bitrate === 1) {
-
             $bitrate = $bitrate . ' byte';
-
         } else {
-
             $bitrate = '0 bytes';
-
         }
-
-
     if ($best) {
         send_json([
             'links' => [
@@ -86,9 +64,7 @@ if ($bitrate >= 1073741824) {
     } else {
         send_json(['error' => 'No links found']);
     }
-
 } catch (\YouTube\Exception\YouTubeException $e) {
-
     send_json([
         'error' => $e->getMessage()
     ]);
