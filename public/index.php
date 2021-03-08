@@ -51,6 +51,49 @@ if ($bitrate >= 1073741824) {
         } else {
             $bitrate = '0 bytes';
         }
+
+$VidDuration = $getinfo->contentDetails->duration;
+
+function covtime($yt){
+
+    $yt=str_replace(['P','T'],'',$yt);
+
+    foreach(['D','H','M','S'] as $a){
+
+        $pos=strpos($yt,$a);
+
+        if($pos!==false) ${$a}=substr($yt,0,$pos); else { ${$a}=0; continue; }
+
+        $yt=substr($yt,$pos+1);
+
+    }
+
+    if($D>0){
+
+        $M=str_pad($M,2,'0',STR_PAD_LEFT);
+
+        $S=str_pad($S,2,'0',STR_PAD_LEFT);
+
+        return ($H+(24*$D)).":$M:$S"; // add days to hours
+
+    } elseif($H>0){
+
+        $M=str_pad($M,2,'0',STR_PAD_LEFT);
+
+        $S=str_pad($S,2,'0',STR_PAD_LEFT);
+
+        return "$H:$M:$S";
+
+    } else {
+
+        $S=str_pad($S,2,'0',STR_PAD_LEFT);
+
+        return "$M:$S";
+
+    }
+
+}
+
 header('Content-Type: application/json; charset=utf-8');
 
     if ($best) {
