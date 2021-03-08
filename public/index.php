@@ -94,7 +94,7 @@ function covtime($yt){
 
 }
 
-$bitrate = [$best->contentLength];
+$bitrate = $best->contentLength;
 
 if ($bitrate >= 1073741824) {
 
@@ -130,7 +130,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 $result = [
 
-    'url' => [$best->url],
+    'url' => $best->url,
 
     'title' => $title,
 
