@@ -51,6 +51,8 @@ if ($bitrate >= 1073741824) {
         } else {
             $bitrate = '0 bytes';
         }
+header('Content-Type: application/json; charset=utf-8');
+
     if ($best) {
         send_json([
             'links' => [
