@@ -26,7 +26,8 @@ try {
 
     if ($best) {
         send_json([
-            'links' => [$best]
+            'links' => [$best->url]
+            'sizebet' => [$best->contentLength]
         ]);
     } else {
         send_json(['error' => 'No links found']);
