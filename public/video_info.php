@@ -28,8 +28,8 @@ try {
         send_json([
             'links' => [
              'url'=> $best->url,
+             'sizebet'=> $best->contentLength,
               ],
-            'sizebet' => [$best->contentLength]
         ]);
     } else {
         send_json(['error' => 'No links found']);
