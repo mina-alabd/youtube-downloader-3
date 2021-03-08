@@ -14,7 +14,8 @@ if($_GET['url']){
 
 if(preg_match('/(http(s|):|)\/\/(www\.|)yout(.*?)\/(embed\/|watch.*?v=|)([a-z_A-Z0-9\-]{11})/i', $url)){
 
-			function getYoutubeIdFromUrl($url) {    $parts = parse_url($url);
+function getYoutubeIdFromUrl($url) {
+    $parts = parse_url($url);
 
     if(isset($parts['query'])){
 
@@ -49,8 +50,9 @@ $dislike_count = $getinfo->statistics->dislikeCount;
 $youtube = new \YouTube\YouTubeDownloader();
 
 $links = $youtube->getDownloadLinks($url);
+$youtube = new \YouTube\YouTubeDownloader();
 
-$error = $youtube->getLastError();
+    $best = $links->getFirstCombinedFormat();
 
 $VidDuration = $getinfo->contentDetails->duration;
 
